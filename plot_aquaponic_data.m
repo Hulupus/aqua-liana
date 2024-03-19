@@ -13,6 +13,11 @@ table_romeo = readtable("./data/romeo_data.csv", "VariableNamingRule","preserve"
 table_golf = readtable("./data/golf_data.csv", "VariableNamingRule","preserve");
 table_papa = readtable("./data/papa_data.csv", "VariableNamingRule","preserve");
 
+% data-fragments
+table_golf1 = readtable("data\Datensplitter\golf_data1.csv", "VariableNamingRule","preserve");
+table_golf2 = readtable("data\Datensplitter\golf_data2.csv", "VariableNamingRule","preserve");
+table_golf3= readtable("data\Datensplitter\golf_data3.csv", "VariableNamingRule","preserve");
+
 %% Clean data
 
 romeo_data = clean(table_romeo);
@@ -22,8 +27,8 @@ papa_data = clean(table_papa);
 %% Pick Data and Dates
 % Change Values here to choose what you want to plot
 
-dataset = table_golf;           % Choose between romeo_data or table_golf
-param = "co2content";           % Choose Parameter (temperature, pH, electric conductivity) or (temperatur, co2content)
+dataset = table_romeo;           % Choose between romeo_data or table_golf
+param = "temperature";           % Choose Parameter (temperature, pH, electric conductivity) or (temperatur, co2content)
 
 dates = dataset.datetime;
 main_data = dataset.(param);
@@ -34,6 +39,13 @@ secondary_data = table_papa;    % If you chose table_golf, you can add table_pap
 
 plot(dataset, "datetime", param, "Color", "#6c99bb", "LineWidth", 1.5)
 hold on;
+
+% Temp
+% plot(table_golf1, "datetime", param, "Color", "#6c99bb", "LineWidth", 1.5)
+% hold on;
+% plot(table_golf3, "datetime", param, "Color", "#6c99bb", "LineWidth", 1.5)
+% hold on;
+%
 
 if (istable(secondary_data))
     plot(secondary_data, "datetime", param, "Color", "#f0c066", "LineWidth", 1.5)
